@@ -1,5 +1,5 @@
-# TrueWallet
-THsms library For Node.js
+# THsms
+asynchonous THsms api library For Node.js
 
 # PHP Version & Credit
 visit this website for php version https://thsms.com/api
@@ -14,9 +14,56 @@ visit this website for php version https://thsms.com/api
 # How to use
 - install require package 
 - import this library to your controller
-- send request data with post to endpoint and Enjoy !!
+- setting username & password and if you are going to use sendMessage method don't forget to setting request mobileNumber and Message !!
 - if you found any bugs please let me know or issue it.
 
+# Example response
+response from method sendMessage
+
+```
+{
+  service: {
+    $: {
+      generator: "zend",
+      version: "1.0"
+  },
+  send: [
+    {
+          message: [
+            "OK"
+          ],
+          uuid: [
+            "0bd4-b75815d4-00000000-4c15-e77f9e29"
+          ],
+          credit_usage: [
+              "1"
+          ],
+          credit: [
+              "767"
+          ],
+          status: [
+              "success"
+          ]
+        }
+     ]
+  }
+}
+```
+
+response from method getCredit
+```
+[
+  {
+    amount: [
+    "767"
+    ],
+    status: [
+    "success"
+    ]
+  }
+]
+
+```
 
 # Debugging
 
