@@ -6,63 +6,44 @@
  */
 
 
-import requestPromise from 'request-promise-native';
+import rp from 'request-promise-native';
 
-
-const apiUrl = `http://www.thsms.com/api/rest`;
-const xmlParser = require("xml2js").parseString;
-const sms = {
-    username: ``,
-    password: ``,
-    from: ``,
+let xmlParser = require("xml2js").parseString;
+let opts = {
+    uri: `http://www.thsms.com/api/rest`,
+    qs: {
+        username: '',
+        password: '',
+        from:'',
+    }
 };
-
 
 const thsms = {
 
-    async getCredit(req, res) {
-        var options = {
-            uri: apiUrl,
-            qs: {
-                method: `credit`,
-                username: sms.username,
-                password: sms.password
-            }
-        };
-
-        var httpRequest = await requestPromise(options);
-        xmlParser(httpRequest, (err, resp) => {
-            res.json(resp.service.credit);
-        });
+       getCredit: async(req, res)=> {
+        
+        opts.qs.method = 'credit';
+        rp(opts).then(r =>{
+            xmlParser(r, (err, resp) => {
+                res.status(200).json(resp.service.credit);
+            })
+        }).catch(er => console.log(er));
+        
     },
 
-    async sendMessage(req, res) {
-        var options = {
-            uri: apiUrl,
-            qs: {
-                method: `send`,
-                username: sms.username,
-                password: sms.password,
-                from: sms.from,
-                to: req.mobileNumber,
-                message: req.message
-            }
-        };
+    sendMessage: async (req, res) => {
 
-        var httpRequest = await requestPromise(options);
-        xmlParser(httpRequest, (err, resp) => {
-            res.json(resp);
-        });
+        opts.qs.method = `send`;
+        opts.qs.from = '';
+        opts.qs.to = '';
+        opts.qs.message = '';
 
-
-
+        rp(opts).then( r = > {
+            xmlParser(r, (err, resp) => {
+                res.json(resp);
+            });
+        }).cacth(er => console.log(er));
     },
-
-
-
-
-
-
-
+      
 }
 export default thsms;
