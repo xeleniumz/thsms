@@ -40,7 +40,7 @@ const thsms = {
 
         rp(opts).then( r = > {
             xmlParser(r, (err, resp) => {
-                res.json(resp);
+                res.status(200).json(resp);
             });
         }).cacth(er => console.log(er));
     },
