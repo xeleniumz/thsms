@@ -38,7 +38,7 @@ const thsms = {
         opts.qs.to = '';
         opts.qs.message = '';
 
-        rp(opts).then( r = > {
+        rp(opts).then( r => {
             xmlParser(r, (err, resp) => {
                 res.status(200).json(resp);
             });
